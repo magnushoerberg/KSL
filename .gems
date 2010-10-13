@@ -6,3 +6,4 @@ dm-validations
 dm-do-adapter
 dm-sqlite-adapter
 do_sqlite3
+extlib
