@@ -13,4 +13,5 @@ dm-do-adapter
 dm-sqlite-adapter
 dm-postgres-adapter
 do_sqlite3
+do_postgres
 extlib
