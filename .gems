@@ -1,3 +1,5 @@
 sinatra --version 1
 haml
 dm-core
+dm-migrations
+dm-validations

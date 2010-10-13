@@ -4,7 +4,6 @@ require 'dm-core'
 require 'dm-migrations'
 require 'dm-validations'
 require 'session_auth'
-require "sinatra/reloader"
 require 'passwords.rb'
 
 class Kroken
@@ -45,6 +44,7 @@ class DaKroken < Sinatra::Base
 	end
 
 	configure :development do
+		require "sinatra/reloader"
 		DataMapper::Logger.new($stdout, :debug)
 		DataMapper.setup(:default, "sqlite3://#{Dir.pwd}/dev.db")
 		register Sinatra::Reloader
