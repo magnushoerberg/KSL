@@ -4,4 +4,5 @@ dm-core
 dm-migrations
 dm-validations
 dm-do-adapter
-dm-sqlight-adapter
+dm-sqlite-adapter
+do_sqlite3
