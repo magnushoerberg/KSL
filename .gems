@@ -1,8 +1,14 @@
 sinatra --version 1
 haml
 dm-core
+dm-aggregates
+dm-constraints
 dm-migrations
+dm-transactions
+dm-serializer
+dm-timestamps
 dm-validations
+dm-types
 dm-do-adapter
 dm-sqlite-adapter
 do_sqlite3
