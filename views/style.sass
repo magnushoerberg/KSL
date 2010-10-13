@@ -1,11 +1,21 @@
+=left($dist)
+  float: left
+  margin-left: $dist
+
+=right($dist)
+  float: right
+  margin-right: $dist
+
 body
   margin: 10px
   padding: 5px
 
 .page
   position: relative
-  margin-left: 20%
-  width: 60%
+  margin:
+    left: auto
+    right: auto
+  width: 70%
   #header
     h1
       font-size: 40px
@@ -16,12 +26,33 @@ body
         right: auto
         left: auto
   #content
+    #krokar
+      p
+        align: top
+        width: 55%
+        +left(3px)
+      form
+        +right(3px)
+        width: 40%
+    form#schedule
+      div
+        $height: 30px
+        label
+          margin-top: 5px
+          align: top
+          height: $height
+          +left(3px)
+          width: 25%
+        input
+          align: left
+          width: 30%
+      input
+        align: bottom
+      a
+        align: top
     .left-column
       width: 35%
-      float: left
-      margin-left: 3px
+      +left(3px)
     .right-column
       width: 60%
-      float: right
-      align: top
-      margin-right: 3px
+      +right(3px)
