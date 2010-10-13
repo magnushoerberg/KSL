@@ -21,6 +21,9 @@
 				-if duty.type == "chef" 
 					%p Basar i köket gör #{duty.worker}
 					= partial :remove_duty_form, duty
+				-if duty.type == "clean"
+					%p Städar efteråt gör #{duty.worker}
+					= partial :remove_duty_form, duty
 
 :javascript
 	$(document).ready(function() {

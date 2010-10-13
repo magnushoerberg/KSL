@@ -1,4 +1,6 @@
+-# encoding: ISO-8859-1
 %form#schedule{:method=> "post", :action=> "/booking"}
+	%input{:type=> "hidden", :name=> "id", :value=> "#{@kroken.id}"}
 	%div
 		%label Fylla kylar
 		%input{:type=> "text", :name => "fridge"}
@@ -13,7 +15,7 @@
 		%input{:type=> "text", :name => "chef"}
 	%div
 		%label Städa efteråt
-		%input#clean{:type=> "text"}	
+		%input{:type=> "text", :name => "clean"}	
 	%a{:href=> "/"} Tillbaka
 	%input{:type => "submit", :value => "spara"}
 	

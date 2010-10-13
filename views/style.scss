@@ -36,36 +36,23 @@ body
 	#content {
 		#krokar {
 			p {
-				align: top;
-				width: 55%;
 				@include left(3px);
+				width: 54%;
 			}
 			form {
-				@include right(3px);
-				align: right;
-				width: 40%;
+				width: 45%;
+				float: right;
 			}
 		}
 		form#schedule {
 			div {
-				$height: 30px;
 				label{
-					margin-top: 5px;
-					align: top;
-					height: $height;
-					@include left(3px);
-					width: 25%;
+					float: left;
+					width: 300px;
 				}
 				input {
-					align: left;
-					width: 30%;
+					align: right;
 				}
-			}
-			input {
-				align: bottom;
-			}
-			a {
-				align: top;
 			}
 		}
 		.left-column {

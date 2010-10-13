@@ -10,7 +10,7 @@ require 'passwords.rb'
 class Kroken
 	include DataMapper::Resource
 	property :id, Serial
-	property :date, DateTime
+	property :date, Date
 	
 	has n, :dutys
 end
@@ -43,11 +43,13 @@ class DaKroken < Sinatra::Base
 			if duty.type == "fridge"
 				sentence = duty.worker + " kan inte fylla kylarna"
 			elsif duty.type == "carry"
-				sentence = duty.worker.force_encoding("ISO-8859-1") + " kan inte bära barer".force_encoding("ISO-8859-1")
+				sentence = duty.worker+ " kan inte bära barer"
 			elsif duty.type == "bar"
 				sentence = duty.worker + " kan inte jobba i baren"
 			elsif duty.type == "chef"
-				sentence = duty.worker + " kan inte vara kokschef"
+				sentence = duty.worker + " kan inte vara kökschef"
+			elsif duty.type == "clean"
+				sentence = duty.worker + " kan inte städa"
 			end
 			sentence
 		end
@@ -113,6 +115,10 @@ class DaKroken < Sinatra::Base
 		unless params[:chef].empty? then
 			@chef = Duty.first_or_create(:type => "chef", :kroken => Kroken.get(params[:id]), :worker => params[:chef])
 			@chef.save
+		end
+		unless params[:clean].empty? then
+			@clean = Duty.first_or_create(:type=> "clean", :kroken => Kroken.get(params[:id]), :worker => params[:clean])
+			@clean.save
 		end
 		redirect '/'
 	end

@@ -1,5 +1,5 @@
+-# encoding: ISO-8859-1
 %form{:method=> "post", :action=>'/remove'}
 	%input{:type=> "hidden", :name=> "_method", :value=> "delete"}
 	%input{:type=> "hidden", :name=> "id", :value=> "#{@duty.id}"}
 	%input{:type=> "submit", :value=> "#{make_sentence(@duty)}"}
-	
