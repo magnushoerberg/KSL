@@ -1,3 +1,4 @@
+# encoding: ISO-8859-1
 require 'sinatra/base'
 require 'sass'
 require 'dm-core'
@@ -36,6 +37,19 @@ class DaKroken < Sinatra::Base
 		def partial(template, duty)
 			@duty = duty
 			haml template, :layout=> false
+		end
+		
+		def make_sentence(duty)
+			if duty.type == "fridge"
+				sentence = duty.worker + " kan inte fylla kylarna"
+			elsif duty.type == "carry"
+				sentence = duty.worker.force_encoding("ISO-8859-1") + " kan inte bära barer".force_encoding("ISO-8859-1")
+			elsif duty.type == "bar"
+				sentence = duty.worker + " kan inte jobba i baren"
+			elsif duty.type == "chef"
+				sentence = duty.worker + " kan inte vara kokschef"
+			end
+			sentence
 		end
 	end
 	
