@@ -3,3 +3,5 @@ haml
 dm-core
 dm-migrations
 dm-validations
+dm-do-adapter
+dm-sqlight-adapter
