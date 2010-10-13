@@ -1,0 +1,29 @@
+.left-column
+	%form{:method=> "post", :action=> "/schedule"}
+		%input#datepicker{:type=> "text", :name=> "datepicker"}
+		%input{:type=> "submit", :value=> "Schema"}
+#krokar.right-column
+	-for kroken in @krokar
+		%h3
+			%a{:href=> "#"} Kröken #{kroken.date}
+		%div{:name=> "#{kroken.date}"}
+			-for duty in kroken.dutys
+				-if duty.type == "fridge"
+					%p Fylla kylen gör #{duty.worker}
+					= partial :remove_duty_form, duty
+				-if duty.type == "carry"
+					%p Bära barer gör  #{duty.worker}
+					= partial :remove_duty_form, duty
+				-if duty.type == "bar" 
+					%p Jobbar i baren gör #{duty.worker}
+					= partial :remove_duty_form, duty
+				-if duty.type == "chef" 
+					%p Basar i köket gör #{duty.worker}
+					= partial :remove_duty_form, duty
+
+:javascript
+	$(document).ready(function() {
+		$("#datepicker").datepicker();
+		$("#krokar").accordion();
+		$("#datepicker").datepicker("option", "dateFormat", "yy-mm-dd");
+	});

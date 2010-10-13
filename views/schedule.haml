@@ -1,0 +1,22 @@
+= @kroken.date
+%form{:method=> "post", :action=> "/booking"}
+	%input{:type=> "hidden", :name=> "id", :value=> @kroken.id}
+	%div
+		%label Working DA:
+	%div
+		%label Fylla kylar
+		%input{:type=> "text", :name => "fridge"}
+	%div
+		%label Carring duty
+		%input{:type=> "text", :name => "carry"}
+	%div
+		%label Bar duty
+		%input{:type=> "text", :name => "bar"}
+	%div
+		%label Chef duty
+		%input{:type=> "text", :name => "chef"}
+	%div
+		%label Cleanup duty
+		%input#clean{:type=> "text"}
+	%input{:type => "submit", :value => "spara"}
+	

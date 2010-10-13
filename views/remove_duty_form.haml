@@ -1,0 +1,4 @@
+%form{:method=> "post", :action=>'/remove'}
+	%input{:type=> "hidden", :name=> "_method", :value=> "delete"}
+	%input{:type=> "hidden", :name=> "id", :value=> "#{@duty.id}"}
+	%input{:type=> "submit", :value=> "#{@duty.worker} kan inte #{@duty.type}"}

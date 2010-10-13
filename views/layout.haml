@@ -1,0 +1,20 @@
+!!!
+%html
+	%head
+		%title DA
+		%link{:rel=> "stylesheet", :type=> "text/css", :href=> 'http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/sunny/jquery-ui.css'}
+		%link{:rel=> "stylesheet", :type=> "text/css", :href=> '/style.css'}
+		%script{:type=> 'text/javascript', :src=> "http://ajax.googleapis.com/ajax/libs/jquery/1.4/jquery.min.js"}
+		%script{:type=> 'text/javascript', :src=> "http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js"}
+	%body.page
+		#header
+			%h1.ui-widget.ui-widget-header Torsdags Kröken
+			%a{:href=> "/logout"} Logga ut
+		#content= yield
+	:javascript
+		$(document).ready(function() {
+			$("[type*=submit]").button();
+			$("a[href]").button();
+			$("input").addClass("ui-widget");
+			$("label").addClass("ui-widget");
+		});
