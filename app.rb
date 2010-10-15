@@ -26,11 +26,12 @@ class DaKroken < Sinatra::Base
 	
 	helpers do
 		def partial(template, duty)
+			
 			@duty = duty
 			haml template, :layout=> false
 		end
 		
-		def make_kroken_viewmodel
+		def make_kroken_viewmodel(date)
 			@view_models = []
 			duties = Duty.all
 			for duty in duties
@@ -39,9 +40,22 @@ class DaKroken < Sinatra::Base
 				else
 					@view_models.select {|a| a.type == duty.type && a.date == duty.kroken.date}.first.workers.push(duty.worker)
 				end
-				@view_models
 			end
-			@view_models
+			@view_models.each { |model| 
+				case model.type
+					when "fridge"
+						model.type = "Fylla kylen gör"
+					when "carry"
+						model.type = "Bär barer gör"
+					when "bar"
+						model.type = "Står i baren gör"
+					when "chef"
+						model.type = "Står i köket gör"
+					when "clean"
+						model.type = "Städar gör"
+				end
+			}
+			@view_models.select{|model| model.date == date}
 		end
 		
 		def make_sentence(duty)
@@ -100,7 +114,7 @@ class DaKroken < Sinatra::Base
 	
 	get '/style.css' do
 		content_type 'text/css'
-		sass :style
+		sass :'style/style'
 	end
 	
 	get '/logout' do

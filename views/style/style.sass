@@ -1,4 +1,59 @@
-/* style.scss */
-#navbar {
-  width: 80%;
-}
+=left($dist)
+  float: left
+  margin-left: $dist
+
+=right($dist)
+  float: right
+  margin-right: $dist
+
+body
+  margin: 10px
+  padding: 5px
+
+.page
+  position: relative
+  margin:
+    left: auto
+    right: auto
+  width: 80%
+  #header
+    #navbar
+      margin-bottom: 5px
+      width: 100%
+      +right(3px)
+      clear: left
+      .align-right
+        +right(3px)
+      .align-left
+        +left(3px)
+    h1
+      font-size: 40px
+      text:
+        align: center
+  #content
+    #krokar
+      width: 63%
+      +right(3px)
+      p
+        +left(3px)
+        width: 54%
+      form
+        width: 45%
+        float: right
+    .search-form
+      width: 35%
+      +left(3px)
+    form#schedule
+      div
+        width: 35%
+        clear: both
+        label
+          +left(3px)
+        input
+          +right(3px)
+  #footer
+    clear: both
+    float: bottom
+    a
+      margin-top: 6px
+      +right(3px)

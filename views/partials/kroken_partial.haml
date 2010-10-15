@@ -1,0 +1,6 @@
+-# encoding: ISO-8859-1
+%dl
+-for vm in make_kroken_viewmodel(@kroken.date)
+	%dt #{vm.type}, #{vm.date}
+	-for worker in vm.workers
+		%dd=worker

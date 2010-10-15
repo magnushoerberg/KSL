@@ -4,11 +4,11 @@
 		%input#datepicker{:type=> "text", :name=> "datepicker"}
 		%input{:type=> "submit", :value=> "Schema"}
 #krokar.right-column
-	-for kroken in @krokar
+	-for @kroken in @krokar
 		%h3
-			%a{:href=> "#"} Kröken #{kroken.date}
-		%div{:name=> "#{kroken.date}"}
-			=partial :kroken_partial, kroken
+			%a{:href=> "#"} Kröken #{@kroken.date}
+		%div{:name=> "#{@kroken.date}"}
+			=partial :"partials/kroken_partial", @kroken
 
 :javascript
 	$(document).ready(function() {
