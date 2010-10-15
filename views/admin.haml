@@ -5,6 +5,5 @@
 	%label Lösen:
 	%input{:type=> "text", :name=> "pass"}
 	%input{:type=> "submit", :value=> "Lägg till användare"}
-- for user in @users do
-	%label= user.name
+%a{:href=> "/remove/user"} Ta bort användare?
 =partial :duties_partial, @duties

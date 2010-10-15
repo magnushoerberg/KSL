@@ -1,0 +1,8 @@
+-# encoding: ISO-8859-1
+%form{:method=>"post", :action=> "/remove/user"}
+	%input{:type=> "hidden", :name=>"_method", :value=> "delete"}
+	-for user in @users
+		%label Vill du ta bort #{user.name}?
+		%input{:type=> "checkbox", :name=> "name", :value=> "#{user.id}"}
+		%br
+	%input{:type=> "submit", :value=> "Ta bort markerade användare"}

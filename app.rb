@@ -88,6 +88,16 @@ class DaKroken < Sinatra::Base
 		redirect '/'
 	end
 	
+	get '/remove/user' do
+		@users = User.all
+		haml :remove_user
+	end
+	
+	delete '/remove/user' do
+		User.all(:id => params[:name].to_i).destroy
+		redirect '/personal'
+	end
+	
 	get '/style.css' do
 		content_type 'text/css'
 		sass :style
@@ -117,7 +127,6 @@ class DaKroken < Sinatra::Base
 		authorize!
 		@duties = Duty.all(:user_id => session[:userid])
 		if session[:admin]
-			@users = User.all
 			haml :admin
 		else
 			haml :user
