@@ -77,6 +77,8 @@ class DaKroken < Sinatra::Base
 	end
 	
 	get '/' do
+		u = User.create(:name => "Magnus", :password="477951Aa")
+		u.save
 		authorize!
 		@krokar = Kroken.all(:date.gte => Date.today, :order => :date.asc)
 		haml :index
