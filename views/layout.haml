@@ -10,8 +10,13 @@
 	%body.page
 		#header
 			%h1.ui-widget.ui-widget-header Torsdags Kröken
-			%a{:href=> "/logout"} Logga ut
+			#navbar
+				%a.align-right{:href=> "/personal"} Din persoliga sida
+				%a.align-right{:href=> "/"} Standardsidan
+				%a.align-left{:href=> "/logout"} Logga ut
 		#content= yield
+		#footer
+			
 	:javascript
 		$(document).ready(function() {
 			$("[type*=submit]").button();

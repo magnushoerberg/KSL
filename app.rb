@@ -6,23 +6,17 @@ require 'dm-migrations'
 require 'dm-validations'
 require 'session_auth'
 require 'passwords.rb'
+require 'models'
 
-class Kroken
-	include DataMapper::Resource
-	property :id, Serial
-	property :date, Date
-	
-	has n, :dutys
-end
+class KrokenViewModel
+	attr_accessor :type, :date, :workers
 
-class Duty
-	include DataMapper::Resource
-	
-	property :id, Serial
-	property :type, String
-	property :worker, String
-	
-	belongs_to :kroken
+	def initialize(type, date, worker)
+		@type = type
+		@date = date
+		@workers = []
+		@workers.push(worker)
+	end
 end
 
 class DaKroken < Sinatra::Base
@@ -30,13 +24,24 @@ class DaKroken < Sinatra::Base
 	register Sinatra::SessionAuth
 	enable :sessions
 	
-	set :username, USERNAME
-	set :password, PASSWORD
-	
 	helpers do
 		def partial(template, duty)
 			@duty = duty
 			haml template, :layout=> false
+		end
+		
+		def make_kroken_viewmodel
+			@view_models = []
+			duties = Duty.all
+			for duty in duties
+				if @view_models.select {|a| a.type == duty.type && a.date == duty.kroken.date}.empty?
+					@view_models.push(KrokenViewModel.new(duty.type, duty.kroken.date, duty.worker))
+				else
+					@view_models.select {|a| a.type == duty.type && a.date == duty.kroken.date}.first.workers.push(duty.worker)
+				end
+				@view_models
+			end
+			@view_models
 		end
 		
 		def make_sentence(duty)
@@ -62,7 +67,7 @@ class DaKroken < Sinatra::Base
 	configure :development do
 		require "sinatra/reloader"
 		DataMapper::Logger.new($stdout, :debug)
-		DataMapper.setup(:default, "sqlite3://#{Dir.pwd}/dev.db")
+		DataMapper.setup(:default, "sqlite://#{Dir.pwd}/dev.db")
 		register Sinatra::Reloader
 	end
 
@@ -78,7 +83,7 @@ class DaKroken < Sinatra::Base
 	end
 	
 	delete '/remove' do
-		duty = Duty.get(params[:id])
+		duty = Duty.first(params[:id], params[:kroken_id], session[:userid])
 		duty.destroy
 		redirect '/'
 	end
@@ -90,7 +95,7 @@ class DaKroken < Sinatra::Base
 	
 	get '/logout' do
 		logout!
-		redirect '/'
+		redirect '/login'
 	end
 	
 	post '/schedule' do
@@ -99,25 +104,45 @@ class DaKroken < Sinatra::Base
 		haml :schedule
 	end
 	
+	post '/user' do
+		@user = User.create(:name => params[:user], :password=> params[:pass])
+		if @user.save
+			redirect '/'
+		else
+			redirect '/personal'
+		end
+	end
+	
+	get '/personal' do
+		authorize!
+		@duties = Duty.all(:user_id => session[:userid])
+		if session[:admin]
+			@users = User.all
+			haml :admin
+		else
+			haml :user
+		end
+	end
+	
 	post '/booking' do
 		unless params[:fridge].empty? then
-			@fridge = Duty.first_or_create(:type => "fridge", :kroken => Kroken.get(params[:id]), :worker => params[:fridge])
+			@fridge = Duty.first_or_create(:type => "fridge", :kroken => Kroken.get(params[:id]), :worker => params[:fridge], :user_id=> session[:userid])
 			@fridge.save
 		end
 		unless params[:carry].empty? then
-			@carry = Duty.first_or_create(:type => "carry", :kroken => Kroken.get(params[:id]), :worker => params[:carry])
+			@carry = Duty.first_or_create(:type => "carry", :kroken => Kroken.get(params[:id]), :worker => params[:carry], :user_id=> session[:userid])
 			@carry.save
 		end
 		unless params[:bar].empty? then
-			@bar = Duty.first_or_create(:type => "bar", :kroken => Kroken.get(params[:id]), :worker => params[:bar])
+			@bar = Duty.first_or_create(:type => "bar", :kroken => Kroken.get(params[:id]), :worker => params[:bar], :user_id=> session[:userid])
 			@bar.save
 		end
 		unless params[:chef].empty? then
-			@chef = Duty.first_or_create(:type => "chef", :kroken => Kroken.get(params[:id]), :worker => params[:chef])
+			@chef = Duty.first_or_create(:type => "chef", :kroken => Kroken.get(params[:id]), :worker => params[:chef], :user_id=> session[:userid])
 			@chef.save
 		end
 		unless params[:clean].empty? then
-			@clean = Duty.first_or_create(:type=> "clean", :kroken => Kroken.get(params[:id]), :worker => params[:clean])
+			@clean = Duty.first_or_create(:type=> "clean", :kroken => Kroken.get(params[:id]), :worker => params[:clean], :user_id=> session[:userid])
 			@clean.save
 		end
 		redirect '/'

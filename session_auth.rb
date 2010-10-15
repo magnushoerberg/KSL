@@ -7,12 +7,17 @@ module Sinatra
       def authorized?
         session[:authorized]
       end
+	  
+	  def admin?
+		session[:admin]
+	  end
 
       def authorize!
         redirect '/login' unless authorized?
       end
 
       def logout!
+		session[:admin] = false
         session[:authorized] = false
       end
     end
@@ -20,20 +25,24 @@ module Sinatra
     def self.registered(app)
       app.helpers SessionAuth::Helpers
 
-      app.set :username, 'frank'
-      app.set :password, 'changeme'
-
       app.get '/login' do
         haml :login
       end
 
       app.post '/login' do
-        if params[:user] == options.username && params[:pass] == options.password
-          session[:authorized] = true
-          redirect '/'
+		user = User.first(:name=> params[:user] )
+		if user.nil?
+			session[:authorized] = false
+			redirect '/login'
+        elsif params[:pass] == user.password
+			session[:admin] = false
+			session[:admin] = true if user.name == "Magnus"
+			session[:userid] = user.id
+			session[:authorized] = true
+			redirect '/'
         else
-          session[:authorized] = false
-          redirect '/login'
+			session[:authorized] = false
+			redirect '/login'
         end
       end
     end
