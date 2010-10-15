@@ -1,3 +1,5 @@
 *.swp
 *~
 capybara*.html
+passwords.rb
+dev.db
