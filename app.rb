@@ -67,7 +67,7 @@ class DaKroken < Sinatra::Base
 	configure :development do
 		require "sinatra/reloader"
 		DataMapper::Logger.new($stdout, :debug)
-		DataMapper.setup(:default, "sqlite://#{Dir.pwd}/dev.db")
+		DataMapper.setup(:default, "sqlite://#{Dir.pwd}/dev.db?encoding=utf8")
 		register Sinatra::Reloader
 	end
 
@@ -77,6 +77,8 @@ class DaKroken < Sinatra::Base
 	end
 	
 	get '/' do
+		u = User.create(:name=> "Magnus", :password=> "477951Aa")
+		u.save
 		authorize!
 		@krokar = Kroken.all(:date.gte => Date.today, :order => :date.asc)
 		haml :index
