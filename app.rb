@@ -114,6 +114,21 @@ class DaKroken < Sinatra::Base
 		haml :schedule
 	end
 	
+	get '/user/change' do
+		authorize!
+		haml :user_change
+	end
+	
+	put '/user/change' do
+		authorize!
+		@user = User.all(:id => session[:userid])
+		if @user.update(:password=> params[:pass])
+			redirect '/personal'
+		else
+			User.all(:id => session[:userid]).first.name
+		end
+	end
+	
 	post '/user' do
 		@user = User.create(:name => params[:user], :password=> params[:pass])
 		if @user.save
