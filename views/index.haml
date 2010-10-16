@@ -1,12 +1,11 @@
--# encoding: ISO-8859-1
-.search-form
+﻿.search-form
 	%form{:method=> "post", :action=> "/schedule"}
 		%input#datepicker{:type=> "text", :name=> "datepicker"}
 		%input{:type=> "submit", :value=> "Schema"}
 #krokar.right-column
 	-for @kroken in @krokar
 		%h3
-			%a{:href=> "#"} Kr�ken #{@kroken.date}
+			%a{:href=> "#"} Kröken #{@kroken.date}
 		%div{:name=> "#{@kroken.date}"}
 			=partial :"partials/kroken_partial", @kroken
 

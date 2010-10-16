@@ -1,11 +1,11 @@
-# encoding: ISO-8859-1
+ï»¿#encoding: utf-8
 require 'sinatra/base'
 require 'sass'
+require 'haml'
 require 'dm-core'
 require 'dm-migrations'
 require 'dm-validations'
 require 'session_auth'
-require 'passwords.rb'
 require 'models'
 
 class KrokenViewModel
@@ -23,7 +23,9 @@ class DaKroken < Sinatra::Base
 	use Rack::MethodOverride
 	register Sinatra::SessionAuth
 	enable :sessions
-	
+	before do
+		content_type :html, :charset=> 'utf-8'
+	end
 	helpers do
 		def partial(template, duty)
 			
@@ -44,15 +46,15 @@ class DaKroken < Sinatra::Base
 			@view_models.each { |model| 
 				case model.type
 					when "fridge"
-						model.type = "Fylla kylen gör"
+						model.type = "Fylla kylen gÃ¶r"
 					when "carry"
-						model.type = "Bär barer gör"
+						model.type = "BÃ¤ra barer gÃ¶r"
 					when "bar"
-						model.type = "Står i baren gör"
+						model.type = "StÃ¥r i baren gÃ¶r"
 					when "chef"
-						model.type = "Står i köket gör"
+						model.type = "StÃ¥r i kÃ¶ket gÃ¶r"
 					when "clean"
-						model.type = "Städar gör"
+						model.type = "StÃ¤dar gÃ¶r"
 				end
 			}
 			@view_models.select{|model| model.date == date}
@@ -62,13 +64,13 @@ class DaKroken < Sinatra::Base
 			if duty.type == "fridge"
 				sentence = duty.worker + " kan inte fylla kylarna"
 			elsif duty.type == "carry"
-				sentence = duty.worker+ " kan inte bära barer"
+				sentence = duty.worker+ " kan inte bÃ¤ra barer"
 			elsif duty.type == "bar"
 				sentence = duty.worker + " kan inte jobba i baren"
 			elsif duty.type == "chef"
-				sentence = duty.worker + " kan inte vara kökschef"
+				sentence = duty.worker + " kan inte vara kÃ¶kschef"
 			elsif duty.type == "clean"
-				sentence = duty.worker + " kan inte städa"
+				sentence = duty.worker + " kan inte stÃ¤da"
 			end
 			sentence
 		end
@@ -102,7 +104,7 @@ class DaKroken < Sinatra::Base
 	end
 	
 	delete '/remove' do
-		duty = Duty.first(params[:id], params[:kroken_id], session[:userid])
+		duty = Duty.get(params[:id], params[:kroken_id], session[:userid])
 		duty.destroy
 		redirect '/'
 	end
@@ -143,7 +145,7 @@ class DaKroken < Sinatra::Base
 		end
 	end
 	
-	post '/user' do
+	post '/add/user' do
 		@user = User.create(:name => params[:user], :password=> params[:pass])
 		if @user.save
 			redirect '/'

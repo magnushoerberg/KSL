@@ -1,10 +1,9 @@
--# encoding: ISO-8859-1
-%a{:href=> "/user/change"} Vill du byta lösenord?
-%form{:method=> 'post', :action=> "/user"}
+ï»¿%a{:href=> "/user/change"} Vill du byta lÃ¶senord?
+%form{:method=> 'post', :action=> "/add/user"}
 	%label Namn:
 	%input{:type=> "text", :name=> "user"}
-	%label Lösen:
+	%label LÃ¶sen:
 	%input{:type=> "text", :name=> "pass"}
-	%input{:type=> "submit", :value=> "Lägg till användare"}
-%a{:href=> "/remove/user"} Ta bort användare?
+	%input{:type=> "submit", :value=> "LÃ¤gg till anvÃ¤ndare"}
+%a{:href=> "/remove/user"} Ta bort anvÃ¤ndare?
 =partial :"partials/duties_partial", @duties

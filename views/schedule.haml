@@ -1,21 +1,21 @@
--# encoding: ISO-8859-1
+ï»¿
 %form#schedule{:method=> "post", :action=> "/booking"}
 	%input{:type=> "hidden", :name=> "id", :value=> "#{@kroken.id}"}
 	%div
 		%label Fylla kylar
-		%input{:type=> "text", :name => "fridge"}
+		%input{:type=> "text", :name => "fridge", :charset=> 'utf-8'}
 	%div
-		%label Bära bardelar
-		%input{:type=> "text", :name => "carry"}
+		%label BÃ¤ra bardelar
+		%input{:type=> "text", :name => "carry", :charset=> 'utf-8'}
 	%div
 		%label Jobba i baren
-		%input{:type=> "text", :name => "bar"}
+		%input{:type=> "text", :name => "bar", :charset=> 'utf-8'}
 	%div
-		%label Stå i köket
-		%input{:type=> "text", :name => "chef"}
+		%label StÃ¥r i kÃ¶ket
+		%input{:type=> "text", :name => "chef", :charset=> 'utf-8'}
 	%div
-		%label Städa efteråt
-		%input{:type=> "text", :name => "clean"}	
+		%label StÃ¤dar efterÃ¥t
+		%input{:type=> "text", :name => "clean", :charset=> 'utf-8'}	
 	%div
-		%input{:type => "submit", :value => "spara"}
+		%input{:type => "submit", :value => "spara", :charset=> 'utf-8'}
 	
