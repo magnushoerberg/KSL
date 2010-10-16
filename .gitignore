@@ -5,3 +5,4 @@ passwords.rb
 dev.db
 local.db
 public.db
+push_*
