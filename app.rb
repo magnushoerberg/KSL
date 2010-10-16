@@ -90,6 +90,11 @@ class DaKroken < Sinatra::Base
 		DataMapper.auto_upgrade!
 	end
 	
+	get '/style.css' do
+		content_type 'text/css'
+		sass :'style/style'
+	end
+	
 	get '/' do
 		authorize!
 		@krokar = Kroken.all(:date.gte => Date.today, :order => :date.asc)
@@ -110,11 +115,6 @@ class DaKroken < Sinatra::Base
 	delete '/remove/user' do
 		User.all(:id => params[:name].to_i).destroy
 		redirect '/personal'
-	end
-	
-	get '/style.css' do
-		content_type 'text/css'
-		sass :'style/style'
 	end
 	
 	get '/logout' do
@@ -160,6 +160,11 @@ class DaKroken < Sinatra::Base
 		else
 			haml :user
 		end
+	end
+	
+	get '/orders' do
+		authorize!
+		haml :orders
 	end
 	
 	post '/booking' do

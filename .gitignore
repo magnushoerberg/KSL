@@ -3,3 +3,5 @@
 capybara*.html
 passwords.rb
 dev.db
+local.db
+public.db
