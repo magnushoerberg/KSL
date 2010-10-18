@@ -1,6 +1,6 @@
-﻿
-%form#schedule{:method=> "post", :action=> "/booking"}
-	%input{:type=> "hidden", :name=> "id", :value=> "#{@kroken.id}"}
+﻿%h3 Kröken #{@date}
+%form#schedule{:method=> "post", :action=> "/schedule"}
+	%input{:type=> "hidden", :name=> "date", :value=>"#{@date}"}
 	%div
 		%label Fylla kylar
 		%input{:type=> "text", :name => "fridge", :charset=> 'utf-8'}
@@ -18,4 +18,9 @@
 		%input{:type=> "text", :name => "clean", :charset=> 'utf-8'}	
 	%div
 		%input{:type => "submit", :value => "spara", :charset=> 'utf-8'}
-	
+		%a.align-right{:href=> "/make/order/#{@date}"} Hämta ut alkohol
+		-unless @order.nil?
+			%a.align-right{:href=> "/return/order/#{@order.id}"} Lämna in alkohol
+-unless @order.nil?
+	-for article in @order.articles
+		%p.ui-widget #{article.name}: #{article.amount}

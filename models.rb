@@ -41,15 +41,24 @@ class Order
 	property :id, Serial
 	property :date, Date
 	
-	has n, :articles
+	has n, :articles, :through => Resource
 end
 
+class Inventory
+	include DataMapper::Resource
+	
+	property :id, Serial
+	property :name, String
+	property :price, Float
+end
 class Article
 	include DataMapper::Resource
 	
 	property :id, Serial
 	property :name, String
-	property :amount, Integer
-	
+	property :price, Float
+	property :amount, Integer, :default=> 0
+	property :price, Float
+	property :order_id, Integer, :key=> true, :min => 1
 	belongs_to :order, :required=> false
 end

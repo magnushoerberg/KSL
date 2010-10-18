@@ -11,8 +11,8 @@ module Sinatra
 	  def admin?
 		session[:admin]
 	  end
-
-      def authorize!
+      
+	  def authorize!
         redirect '/login' unless authorized?
       end
 
@@ -31,10 +31,8 @@ module Sinatra
 
       app.post '/login' do
 		user = User.first(:name=> params[:user] )
-		if user.nil?
-			session[:authorized] = false
-			redirect '/login'
-        elsif params[:pass] == user.password
+		redirect '/login' if user.nil?
+		if user.password == params[:pass] 
 			session[:admin] = false
 			session[:admin] = true if user.name == "Magnus"
 			session[:userid] = user.id
@@ -45,6 +43,11 @@ module Sinatra
 			redirect '/login'
         end
       end
+	  
+	  app.get '/logout' do
+			logout!
+			redirect '/login'
+	  end
     end
   end
 

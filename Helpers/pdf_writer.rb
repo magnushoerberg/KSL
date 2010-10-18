@@ -1,18 +1,30 @@
 require 'pdf-reader'
-require "c:/users/Magnus/DA_kroken/helpers/pdf_reader.rb"
+require "pdf_reader.rb"
+require 'sinatra/base'
 
-class WritePDFToDB
-	attr_accessor :receiver
-	def initialize
-		@receiver = PageTextReceiver.new
-		pdf = PDF::Reader.file("bestallning.pdf", receiver)
-	end
-	
-	def make_array
-		receiver.content.to_s.scan(/\kr/)
-	end
-	
-	def
+module Sinatra
+	module PdfParser
+		module Helpers			
+			def make_array path
+				receiver = PageTextReceiver.new
+				pdf = PDF::Reader.file(path, receiver)
+				arr = receiver.content.to_s.split(/\kr/)
+				arr.each {|str| 
+					unless str.match(/\d/).nil?
+						a = Article.create(:name => str.scan(/\D{2,}/), :price=> str.scan(/\d.\d+/).to_f)
+						a.save
+				}
+			end
+		end
+		app.helpers PdfParser::Helpers
 		
+		app.post '/add/articles/to_db'
+			if admin?
+				make_array params[:path]
+			else
+				redirect '/'
+			end
+		end
 	end
+	register PdfParser
 end
