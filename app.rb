@@ -1,11 +1,9 @@
-﻿#encoding: utf-8
-require 'sinatra/base'
+﻿require 'sinatra/base'
 require 'sass'
 require 'haml'
 require 'dm-core'
 require 'dm-migrations'
 require 'dm-validations'
-require 'sinatra/jsonp'
 require 'session_auth'
 require 'csv_reader'
 require 'models'
@@ -25,6 +23,7 @@ class DaKroken < Sinatra::Base
 	use Rack::MethodOverride
 	register Sinatra::SessionAuth
 	register Sinatra::CsvReader
+	require 'sinatra/jsonp'
 	include Sinatra::Jsonp
 	set :static, enable
 	set :root, File.dirname(__FILE__)
