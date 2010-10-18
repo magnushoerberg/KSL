@@ -1,4 +1,5 @@
-﻿require 'sinatra/base'
+﻿# encoding: ISO-8859-1
+require 'sinatra/base'
 require 'sass'
 require 'haml'
 require 'dm-core'
