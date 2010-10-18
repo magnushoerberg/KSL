@@ -23,8 +23,6 @@ class DaKroken < Sinatra::Base
 	use Rack::MethodOverride
 	register Sinatra::SessionAuth
 	register Sinatra::CsvReader
-	require 'sinatra/jsonp'
-	include Sinatra::Jsonp
 	set :static, enable
 	set :root, File.dirname(__FILE__)
 	set :haml, :format => :html5
@@ -223,7 +221,7 @@ class DaKroken < Sinatra::Base
 																{:name=> article.name, :price=> article.price}
 															end
 														}.compact
-		jsonp articles
+		
 	end
 	
 	post '/make/order' do
