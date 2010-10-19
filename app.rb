@@ -26,7 +26,6 @@ class DaKroken < Sinatra::Base
 	set :static, enable
 	set :root, File.dirname(__FILE__)
 	set :haml, :format => :html5
-	set :environment, :production
 	enable :sessions
 	
 	configure :production do 
