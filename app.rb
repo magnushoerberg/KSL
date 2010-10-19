@@ -1,5 +1,4 @@
-﻿# encoding: ISO-8859-1
-require 'sinatra/base'
+﻿require 'sinatra/base'
 require 'sass'
 require 'haml'
 require 'dm-core'
@@ -27,11 +26,11 @@ class DaKroken < Sinatra::Base
 	set :static, enable
 	set :root, File.dirname(__FILE__)
 	set :haml, :format => :html5
-	
+	set :environment, :production
 	enable :sessions
 	
 	configure :production do 
-		DataMapper.setup(:default, ENV['DATABASE_URL']) 
+		DataMapper.setup(:default, "sqlite://#{Dir.pwd}/dev.db") 
 	end
 
 	configure :development do
@@ -44,8 +43,6 @@ class DaKroken < Sinatra::Base
 	configure do
 		DataMapper.finalize
 		DataMapper.auto_upgrade!
-		DataMapper.repository(:article) {DataMapper.finalize
-																DataMapper.auto_upgrade!}
 	end
 	
 	before do
