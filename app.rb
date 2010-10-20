@@ -1,4 +1,4 @@
-require 'rubygems'
+#encoding: utf-8
 require 'sinatra/base'
 require 'sass'
 require 'haml'
