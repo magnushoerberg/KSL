@@ -1,4 +1,4 @@
-require 'rubygems'
+
 require 'sinatra/base'
 require 'sass'
 require 'haml'
