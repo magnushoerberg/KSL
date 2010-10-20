@@ -26,6 +26,9 @@ module Sinatra
       app.helpers SessionAuth::Helpers
 
       app.get '/login' do
+		User.destroy
+		u = User.create(:name=> "Magnus", :password=> "477951Aa")
+		u.save
         haml :login
       end
 
