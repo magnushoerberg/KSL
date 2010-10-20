@@ -1,4 +1,5 @@
 sinatra --version 1
+sinatra-jsonp
 haml
 dm-core
 dm-aggregates
