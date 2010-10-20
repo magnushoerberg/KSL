@@ -1,3 +1,3 @@
-require 'app'
+require 'app.rb'
 
-run Sinatra::DaKroken
+run Rack::Cascade.new [DaKroken]
