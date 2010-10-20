@@ -25,6 +25,7 @@ class DaKroken < Sinatra::Base
 	use Rack::MethodOverride
 	register Sinatra::SessionAuth
 	register Sinatra::CsvReader
+	register Sinatra::Jsonp
 	set :static, enable
 	set :root, File.dirname(__FILE__)
 	set :haml, :format => :html5
