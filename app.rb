@@ -139,19 +139,19 @@ class DaKroken < Sinatra::Base
 		kroken = Kroken.first_or_create(:date => Date.parse(params[:date]))
 		kroken.save
 		unless params[:fridge].empty? then
-			@fridge = Duty.first_or_create(:type => "fridge", :kroken => kroken, :worker => params[:fridge].force_encoding('utf-8'), :user_id=> session[:userid])
+			@fridge = Duty.first_or_create(:type => "fridge", :kroken => kroken, :worker => params[:fridge], user_id=> session[:userid])
 			@fridge.save
 		end
 		unless params[:carry].empty? then
-			@carry = Duty.first_or_create(:type => "carry", :kroken => kroken, :worker => params[:carry].force_encoding('utf-8'), :user_id=> session[:userid])
+			@carry = Duty.first_or_create(:type => "carry", :kroken => kroken, :worker => params[:carry], :user_id=> session[:userid])
 			@carry.save
 		end
 		unless params[:bar].empty? then
-			@bar = Duty.first_or_create(:type => "bar", :kroken => kroken, :worker => params[:bar].force_encoding('utf-8'), :user_id=> session[:userid])
+			@bar = Duty.first_or_create(:type => "bar", :kroken => kroken, :worker => params[:bar], :user_id=> session[:userid])
 			@bar.save
 		end
 		unless params[:chef].empty? then
-			@chef = Duty.first_or_create(:type => "chef", :kroken => kroken, :worker => params[:chef].force_encoding('utf-8'), :user_id=> session[:userid])
+			@chef = Duty.first_or_create(:type => "chef", :kroken => kroken, :worker => params[:chef], :user_id=> session[:userid])
 			@chef.save
 		end
 		unless params[:clean].empty? then
@@ -175,7 +175,7 @@ class DaKroken < Sinatra::Base
 	end
 	
 	post '/add/user' do
-		@user = User.create(:name => params[:user], :password=> params[:pass])
+		@user = User.create(:name => params[:user].force_encoding('utf-8'), :password=> params[:pass].force_encoding('utf-8'))
 		if @user.save
 			redirect '/'
 		else
