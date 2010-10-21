@@ -139,7 +139,7 @@ class DaKroken < Sinatra::Base
 		kroken = Kroken.first_or_create(:date => Date.parse(params[:date].to_s))
 		kroken.save
 		unless params[:fridge].empty? then
-			@fridge = Duty.first_or_create(:type => "fridge", :kroken => kroken, :worker => params[:fridge], user_id=> session[:userid])
+			@fridge = Duty.first_or_create(:type => "fridge", :kroken => kroken, :worker => params[:fridge], :user_id=> session[:userid])
 			@fridge.save
 		end
 		unless params[:carry].empty? then
