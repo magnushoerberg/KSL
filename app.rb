@@ -136,7 +136,7 @@ class DaKroken < Sinatra::Base
 	end
 	
 	post '/schedule' do
-		kroken = Kroken.first_or_create(:date => Date.parse(params[:date]))
+		kroken = Kroken.first_or_create(:date => Date.parse(params[:date].to_s))
 		kroken.save
 		unless params[:fridge].empty? then
 			@fridge = Duty.first_or_create(:type => "fridge", :kroken => kroken, :worker => params[:fridge], user_id=> session[:userid])
