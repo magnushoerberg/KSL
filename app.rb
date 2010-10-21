@@ -203,7 +203,7 @@ class DaKroken < Sinatra::Base
 	end
 	
 	post '/add/article' do
-		article = Inventory.first_or_create(:name=> params[:name], :price=> params[:price])
+		article = Inventory.first_or_create(:name=> params[:name], :price=> params[:price].to_f)
 		article.save
 		redirect "/make/order/#{params[date]}"
 	end
