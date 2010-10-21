@@ -202,6 +202,11 @@ class DaKroken < Sinatra::Base
 		haml :return_order
 	end
 	
+	post '/add/article' do
+		article = Inventory.first_or_create(:name=> params[:name], :price=> params[:price])
+		article.save
+		redirect "/make/order/#{params[date]}"
+	end
 	put '/return/order' do
 		order = Order.get(params[:order_id])
 		request.POST.delete("order_id")
