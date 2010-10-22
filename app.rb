@@ -176,7 +176,7 @@ class DaKroken < Sinatra::Base
 	
 	post '/add/user' do
 		role = Role::DC if params[:dc?]
-		@user = User.create(:name => params[:user].force_encoding('utf-8'), :password=> params[:pass].force_encoding('utf-8'), :role=> role)
+		@user = User.create(:name => params[:user], :password=> params[:pass], :role=> role)
 		if @user.save
 			redirect '/'
 		else
