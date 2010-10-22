@@ -175,7 +175,8 @@ class DaKroken < Sinatra::Base
 	end
 	
 	post '/add/user' do
-		@user = User.create(:name => params[:user].force_encoding('utf-8'), :password=> params[:pass].force_encoding('utf-8'))
+		role = Role::DC if params[:dc?]
+		@user = User.create(:name => params[:user].force_encoding('utf-8'), :password=> params[:pass].force_encoding('utf-8'), :role=> role)
 		if @user.save
 			redirect '/'
 		else
@@ -184,9 +185,13 @@ class DaKroken < Sinatra::Base
 	end
 	
 	get '/personal' do
+		user = User.get(session[:userid])
 		@duties = Duty.all(:user_id => session[:userid])
 		if session[:admin]
 			haml :admin
+		elsif user.role.eql?(Role::DC) 
+			@orders = Order.all(:order=> :date.desc)
+			haml :dc
 		else
 			haml :user
 		end

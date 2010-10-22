@@ -10,12 +10,19 @@ class Kroken
 	has n, :dutys
 end
 
+class Role
+	DA = "da"
+	DC = "dc"
+	ADMIN = "admin"
+end
+
 class User
 	include DataMapper::Resource
 	
 	property :id, Serial
 	property :name, String, :required=> true, :unique=> true
 	property :password, String, :required=> true
+	property :role, String, :default=> Role::DA 
 	
 	has n, :dutys
 end
