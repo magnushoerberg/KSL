@@ -1,4 +1,3 @@
-# encoding: ISO-8859-1
 require 'sinatra/base'
 
 module Sinatra
