@@ -17,3 +17,4 @@ do_sqlite3
 do_postgres
 extlib
 taps
+pony
