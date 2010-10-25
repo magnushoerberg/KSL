@@ -10,12 +10,12 @@ module Sinatra
         @subject = subject
       end
 
-      def set_html body
-        @bhtml_body = body
+      def set_body html
+        @html_body = html
       end
 
       def send_mail receiver
-        Pony.mail(:to => receiver, :subject=> @subject, :html_body=> '<h1> Hello </h1>', :body => "hello", :via=> :smtp, :via_options=> {
+        Pony.mail(:to => receiver, :subject=> @subject, :html_body=> @html_body, :body => "hello", :via=> :smtp, :via_options=> {
               :address => "smtp.sendgrid.net",
               :from => "magnus.hoerberg@gmail.com",
               :port => "25",
@@ -31,7 +31,7 @@ module Sinatra
 
       app.get '/sendmail' do
         set_subject "hello"
-        set_html partial(:"/partials/kroken_partial", Kroken.all(:date => Date.today)).to_s
+        set_body partial(:"/partials/kroken_partial", Kroken.all(:date => Date.today)).to_s 
         send_mail "magnus.hoerberg@gmail.com"
       end
     end
