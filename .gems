@@ -18,3 +18,4 @@ do_postgres
 extlib
 taps
 pony
+i18n
