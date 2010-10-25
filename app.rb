@@ -28,6 +28,7 @@ class DaKroken < Sinatra::Base
   register Sinatra::CsvReader
   register Sinatra::MailService
   register Sinatra::Jsonp
+  register Sinatra::Scheduler
   set :static, enable
   set :root, File.dirname(__FILE__)
   set :haml, :format => :html5
