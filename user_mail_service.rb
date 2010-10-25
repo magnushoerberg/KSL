@@ -10,7 +10,7 @@ module Sinatra
       end
 
       def send_mail receiver
-        Pony.mail(:to => receiver, :subject=> @subject, :html_body=> '<h1> Hello </h1>', :body => "hello" :via=> :smtp, :via_options=> {
+        Pony.mail(:to => receiver, :subject=> @subject, :html_body=> '<h1> Hello </h1>', :body => "hello", :via=> :smtp, :via_options=> {
               :address => "smtp.sendgrid.net",
               :from => "magnus.hoerberg@gmail.com",
               :port => "25",
