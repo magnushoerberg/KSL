@@ -102,6 +102,9 @@ class DaKroken < Sinatra::Base
     end
   end
 	
+  get '/test' do
+    (Date.today.wday == 1).to_s
+  end
   get '/' do
     @krokar = Kroken.all(:date.gte => Date.today, :order => :date.asc)
     haml :index
