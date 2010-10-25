@@ -13,6 +13,6 @@ module Sinatra
         send_mail "magnus.hoerberg@gmail.com"
       end
     end
-    register Scheduler
   end
+  register Scheduler
 end
