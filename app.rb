@@ -10,6 +10,7 @@ require 'session_auth'
 require 'csv_reader'
 require 'models.rb'
 require 'user_mail_service'
+require 'scheduler'
 
 class KrokenViewModel
   attr_accessor :type, :date, :workers
