@@ -1,0 +1,12 @@
+#orders
+	-for order in @orders
+		%h3
+			%a{:href=> "#"} Här kommer arrangemangsnamnet att stå
+		%div
+			-for article in order.articles
+				%h3 Faktureras för #{article.amount}st #{article.name}
+:javascript
+	$(document).ready(function() {
+		$("#orders").accordion();
+	});
+	

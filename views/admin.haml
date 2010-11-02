@@ -8,6 +8,13 @@
 	%input{:type=> "text", :name=> "user"}
 	%label Lösen:
 	%input{:type=> "text", :name=> "pass"}
+<<<<<<< HEAD
 	%input{:type=> "submit", :value=> "Lägg till användare"}
 %a{:href=> "/remove/user"} Ta bort användare?
 =partial :"partials/duties_partial", @duties
+=======
+	%input{:type=> "submit", :value=> "LÃ¤gg till anvÃ¤ndare"}
+	%input{:type=> "checkbox", :name=> "dc?"}
+%a{:href=> "/remove/user"} Ta bort anvÃ¤ndare?
+=partial :"partials/duties_partial", @duties
+>>>>>>> 44bc993c0f51bfae1a026bfff0613b3ab8d02a97
