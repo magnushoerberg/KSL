@@ -1,5 +1,4 @@
-ï»¿require 'sinatra/base'
-require 'sass'
+require 'sinatra/base'
 require 'haml'
 require 'dm-core'
 require 'dm-migrations'
@@ -26,11 +25,10 @@ class DaKroken < Sinatra::Base
 	set :static, enable
 	set :root, File.dirname(__FILE__)
 	set :haml, :format => :html5
-	set :environment, :production
 	enable :sessions
 	
 	configure :production do 
-		DataMapper.setup(:default, "sqlite://#{Dir.pwd}/dev.db") 
+		DataMapper.setup(:default, "sqlite://#{Dir.pwd}/dev.db?encoding=utf8") 
 	end
 
 	configure :development do
@@ -70,15 +68,15 @@ class DaKroken < Sinatra::Base
 			@view_models.each { |model| 
 				case model.type
 					when "fridge"
-						model.type = "Fylla kylen gÃ¶r"
+						model.type = "Fylla kylen gör"
 					when "carry"
-						model.type = "BÃ¤ra barer gÃ¶r"
+						model.type = "Bära barer gör"
 					when "bar"
-						model.type = "StÃ¥r i baren gÃ¶r"
+						model.type = "Står i baren gör"
 					when "chef"
-						model.type = "StÃ¥r i kÃ¶ket gÃ¶r"
+						model.type = "Står i köket gör"
 					when "clean"
-						model.type = "StÃ¤dar gÃ¶r"
+						model.type = "Städar gör"
 				end
 			}
 			@view_models.select{|model| model.date == date}
@@ -88,13 +86,13 @@ class DaKroken < Sinatra::Base
 			if duty.type == "fridge"
 				sentence = duty.worker + " kan inte fylla kylarna"
 			elsif duty.type == "carry"
-				sentence = duty.worker+ " kan inte bÃ¤ra barer"
+				sentence = duty.worker+ " kan inte bära barer"
 			elsif duty.type == "bar"
 				sentence = duty.worker + " kan inte jobba i baren"
 			elsif duty.type == "chef"
-				sentence = duty.worker + " kan inte vara kÃ¶kschef"
+				sentence = duty.worker + " kan inte vara kökschef"
 			elsif duty.type == "clean"
-				sentence = duty.worker + " kan inte stÃ¤da"
+				sentence = duty.worker + " kan inte städa"
 			end
 			sentence
 		end
@@ -153,7 +151,7 @@ class DaKroken < Sinatra::Base
 			@chef.save
 		end
 		unless params[:clean].empty? then
-			@clean = Duty.first_or_create(:type=> "clean", :kroken => kroken, :worker => params[:clean], :user_id=> session[:userid])
+			@clean = Duty.first_or_create(:type=> "clean", :kroken => kroken, :worker => params[:clean].force_encoding('utf-8'), :user_id=> session[:userid])
 			@clean.save
 		end
 		redirect '/'

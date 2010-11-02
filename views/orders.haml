@@ -1,5 +1,5 @@
-﻿.ui-widget
-	%label Ölsort
+.ui-widget
+	%label Alkoholsort
 	%input#article{:type=> "text", :name=> "article", :charset=> "utf-8"}
 .ui-widget
 	%form#selected_articles{:method=> "post", :action=>"/make/order"}
@@ -7,7 +7,7 @@
 		%input{:type=> "submit", :value=> "Spara order"}
 :javascript
 	function log(message, article) {
-		$("<label>").text("Antal som hämtas ut:").insertAfter($("<label>").text(message).insertBefore($("<input type='text' charset='utf-8'>").attr('name', article).insertBefore($("<input type='button' value='Ta bort' onclick='remove(this)'>").appendTo($("<div>").appendTo("#selected_articles")))))
+		$("<label>").text("Antal som h�mtas ut:").insertAfter($("<label>").text(message).insertBefore($("<input type='text' charset='utf-8'>").attr('name', article).insertBefore($("<input type='button' value='Ta bort' onclick='remove(this)'>").appendTo($("<div>").appendTo("#selected_articles")))))
 	};
 	function remove(elem) {
 		$(elem).parent().remove();

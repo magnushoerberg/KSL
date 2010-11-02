@@ -1,11 +1,11 @@
-﻿.search-form
+.search-form
 	%form{:method=> "get", :action=> "/schedule"}
 		%input#datepicker{:type=> "text", :name=> "datepicker"}
 		%input{:type=> "submit", :value=> "Schema"}
 #krokar.right-column
 	-for @kroken in @krokar
 		%h3
-			%a{:href=> "#"} Kröken #{@kroken.date}
+			%a{:href=> "#"} Kr�ken #{@kroken.date}
 		%div{:name=> "#{@kroken.date}"}
 			=partial :"partials/kroken_partial", @kroken
 

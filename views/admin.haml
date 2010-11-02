@@ -1,13 +1,13 @@
-ï»¿%a{:href=> "/user/change"} Vill du byta lÃ¶senord?
+%a{:href=> "/user/change"} Vill du byta lösenord?
 %form{:method=> 'post', :action=> "/add/articles/to_db"}
-	%label Ange sÃ¶kvÃ¤g:
+	%label Ange sökväg:
 	%input{:type=> "text", :name=> "path"}
-	%input{:type=> "submit", :value=> "LÃ¤gg till data"}
+	%input{:type=> "submit", :value=> "Lägg till data"}
 %form{:method=> 'post', :action=> "/add/user"}
 	%label Namn:
 	%input{:type=> "text", :name=> "user"}
-	%label LÃ¶sen:
+	%label Lösen:
 	%input{:type=> "text", :name=> "pass"}
-	%input{:type=> "submit", :value=> "LÃ¤gg till anvÃ¤ndare"}
-%a{:href=> "/remove/user"} Ta bort anvÃ¤ndare?
+	%input{:type=> "submit", :value=> "Lägg till användare"}
+%a{:href=> "/remove/user"} Ta bort användare?
 =partial :"partials/duties_partial", @duties
