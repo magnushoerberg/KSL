@@ -1,3 +1,5 @@
-require 'app.rb'
+require 'rubygems'
+requrie "bundle/setup"
+require './app.rb'
 
-run Rack::Cascade.new [DaKroken]
+run DaKroken
