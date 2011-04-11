@@ -1,4 +1,3 @@
-class DaKroken < Sinatra::Base
   set :haml, :format => :html5
 	set :views, './views'
   configure :production do 
@@ -13,14 +12,3 @@ class DaKroken < Sinatra::Base
   before do
     content_type :html, :charset=> 'utf-8'
   end
-	get '/' do
-		@bokningar = Bokning.all.collect{|b| {:namn => b.namn, :id => b.id} }
-		haml :index
-	end
-	get '/order/:bokning_id/ny' do
-		haml :order
-	end
-	post '/order/:bokning_id/ny' do
-		Order.create params
-	end
-end

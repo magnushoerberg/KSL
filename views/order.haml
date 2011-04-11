@@ -1,4 +1,61 @@
-%div
-  %label{:for=>'namn'}
-  %input{:type=>'text', :name=>'artikel'}
+#orderEditor.row
+  %table.sevencol
+    %thead
+      %tr
+        %th.twocol Sort
+        %th.threecol Artikel
+        %th.twocol Antal
+        %th.twocol Pris
+        %th.twocol Subtotal
+    %tbody{:"data-bind"=>'template: {name: "orderRad", foreach: rader}'}
+  %div.row
+    %span
+      %a Total:
+      %a{:"data-bind"=>'text: total(), click: tabortRad'}
+    %div
+      %button{:"data-bind" => "click: nyRad"} Ny artikel
+      %button{:"data-bind" => "click: spara"} Skapa
+%script{:type=>"text/html", :id=>"orderRad"}
+  %tr
+    %td.twocol
+      %select{:"data-bind"=>'options: kategorier, optionsText: "namn", optionsCaption: "Välj...", value: kategori'}
+    %td.threecol
+      %select{:"data-bind"=>'visible: kategori, options: kategori() ? kategori().artiklar : null, optionsText: "namn", optionsCaption: "Välj...", value: artikel'}
+    %td.twocol
+      %input.fivecol{:"data-bind"=>'visible: artikel, value: antal, valueUpdate: "afterkeydown"'}
+    %td.twocol
+      %span{:"data-bind"=>'visible: artikel, text: artikel() ? artikel().pris: null'}
+    %td.twocol
+      %span{:"data-bind"=>'visible: artikel, text: subtotal()'}
+    %td
+      %a{:href=>'#', :"data-bind"=>'click: function() { orderViewModel.tabortRad($data)}'}Ta bort
 :javascript
+  kategorier = [{namn : "Öl", artiklar : [{namn : "Spendrups", pris: 12.8}]},{namn : "Cider", artiklar : [{namn: "Briska Päron", pris: 11}]}]
+  var orderRad = function() {
+    this.kategori = ko.observable();
+    this.artikel = ko.observable();
+    this.antal = ko.observable();
+    this.subtotal = ko.dependentObservable(function() {
+      return this.artikel() ? this.artikel().pris*parseInt("0"+this.antal(),10) : 0; 
+    }.bind(this));
+  };
+
+  var order = function() {
+    this.rader = ko.observableArray([new orderRad]);
+    this.total = ko.dependentObservable(function() {
+      var total = 0;
+      for(var i = 0; i < this.rader().length; i++)
+        total += this.rader()[i].subtotal();
+      return total;
+    }.bind(this))
+    this.nyRad = function() {this.rader.push(new orderRad())};
+    this.tabortRad = function(rad) {this.rader.remove(rad)}
+    this.spara = function() {
+      var dataAttSpara = $.map(this.rader(), function(rad) {
+        return rad.artikel() ? {artikelNamn : line.artikel().namn, antal: line.antal()} : undefined 
+      });
+      alert(JSON.stringify(dataAttSpara));
+    };
+  }
+  var orderViewModel = new order();
+  ko.applyBindings(orderViewModel);

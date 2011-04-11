@@ -1,6 +1,6 @@
-class DaKroken < Sinatra::Base
-  set :haml, :format => :html5
-	set :views, './views'
+class BokningController < Sinatra::Base
+  set :haml, :format => :html5, :layout=> :"../layout"
+	set :views, './views/tidbok'
   configure :production do 
     DataMapper.setup(:default,ENV['DATABASE_URL']) 
   end
@@ -13,14 +13,16 @@ class DaKroken < Sinatra::Base
   before do
     content_type :html, :charset=> 'utf-8'
   end
-	get '/' do
-		@bokningar = Bokning.all.collect{|b| {:namn => b.namn, :id => b.id} }
-		haml :index
+
+	get '/ny' do
+		haml :form
 	end
-	get '/order/:bokning_id/ny' do
-		haml :order
+	post '/ny' do
+		b = Bokning.create params
+		redirect "/order/#{b.id}/ny"
 	end
-	post '/order/:bokning_id/ny' do
-		Order.create params
+	get '/:id' do
+		@bokning = Bokning.get(params[:id]) 
+		haml :bokning
 	end
 end

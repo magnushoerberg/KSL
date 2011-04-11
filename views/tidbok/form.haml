@@ -1,0 +1,18 @@
+%form{:method => 'POST'}
+  %fieldset
+    .row
+      .onecol
+        %label{:for=>'namn'}Namn:
+      .twocol
+        %input{:type=>'text', :name=>'namn'}
+    .row
+      .onecol
+        %label{:for=>'till'}Till:
+      .twocol
+        %input{:type=>'text', :name=>'till'}
+    .row
+      .onecol
+        %label{:for=>'namn'}Från:
+      .twocol
+        %input{:type=>'text', :name=>'fran'}
+    %input{:type=>'submit', :value=>'Boka'}

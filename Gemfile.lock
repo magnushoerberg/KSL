@@ -1,5 +1,4 @@
 GEM
-  remote: http://rubygems.org/
   specs:
     addressable (2.2.5)
     backports (2.0.3)
@@ -10,12 +9,18 @@ GEM
     dm-do-adapter (1.1.0)
       data_objects (~> 0.10.2)
       dm-core (~> 1.1.0)
+    dm-serializer (1.1.0)
+      dm-core (~> 1.1.0)
+      fastercsv (~> 1.5.4)
+      json (~> 1.4.6)
     dm-sqlite-adapter (1.1.0)
       dm-do-adapter (~> 1.1.0)
       do_sqlite3 (~> 0.10.2)
     do_sqlite3 (0.10.3)
       data_objects (= 0.10.3)
+    fastercsv (1.5.4)
     haml (3.0.25)
+    json (1.4.6)
     monkey-lib (0.5.4)
       backports
     rack (1.2.2)
@@ -39,6 +44,7 @@ PLATFORMS
 
 DEPENDENCIES
   dm-core
+  dm-serializer
   dm-sqlite-adapter
   haml
   sinatra

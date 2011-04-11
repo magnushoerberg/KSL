@@ -4,9 +4,15 @@ require "bundler/setup"
 require 'sinatra'
 require 'sinatra/reloader'
 require 'dm-core'
+require 'dm-serializer'
 require 'haml'
 
-require './app'
-require './models'
+use Rack::Static, :urls =>["/css", "/js", "/images"], :root=>"public"
+Dir[Dir.pwd+"/lib/*.rb"].each{ |file| require file}
 
-run DaKroken
+map '/bokning' do
+	run BokningController
+end
+map '/' do
+	run DaKroken
+end

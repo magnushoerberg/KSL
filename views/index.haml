@@ -1,5 +1,6 @@
 %ul
--@bokingar.each do |b|
+-@bokningar.each do |b|
   %li
-    %a{:href=>"/bokning/#{b.id}"}Se bokning
-  %li=b.namn
+    %span
+      %a{:href=>"/bokning/#{b[:id]}"}Se bokning
+      %a= b[:namn]
