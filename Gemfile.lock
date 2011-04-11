@@ -1,14 +1,45 @@
 GEM
   remote: http://rubygems.org/
   specs:
+    addressable (2.2.5)
+    backports (2.0.3)
+    data_objects (0.10.3)
+      addressable (~> 2.1)
+    dm-core (1.1.0)
+      addressable (~> 2.2.4)
+    dm-do-adapter (1.1.0)
+      data_objects (~> 0.10.2)
+      dm-core (~> 1.1.0)
+    dm-sqlite-adapter (1.1.0)
+      dm-do-adapter (~> 1.1.0)
+      do_sqlite3 (~> 0.10.2)
+    do_sqlite3 (0.10.3)
+      data_objects (= 0.10.3)
+    haml (3.0.25)
+    monkey-lib (0.5.4)
+      backports
     rack (1.2.2)
     sinatra (1.2.2)
       rack (~> 1.1)
       tilt (>= 1.2.2, < 2.0)
+    sinatra-advanced-routes (0.5.1)
+      monkey-lib (~> 0.5.0)
+      sinatra (~> 1.0)
+      sinatra-sugar (~> 0.5.0)
+    sinatra-reloader (0.5.0)
+      sinatra (~> 1.0)
+      sinatra-advanced-routes (~> 0.5.0)
+    sinatra-sugar (0.5.0)
+      monkey-lib (~> 0.5.0)
+      sinatra (~> 1.0)
     tilt (1.2.2)
 
 PLATFORMS
   ruby
 
 DEPENDENCIES
+  dm-core
+  dm-sqlite-adapter
+  haml
   sinatra
+  sinatra-reloader

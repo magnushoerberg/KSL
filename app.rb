@@ -12,11 +12,25 @@ class DaKroken < Sinatra::Base
   end
   before do
     content_type :html, :charset=> 'utf-8'
-    authorize! unless request.path_info == '/login'
   end
-
 	get '/' do
-		@bokningar = Bokning.all
+		@bokningar = Bokning.all.collect{|b|
+			{:namn => b.namn, :id => b.id}
+		}
+		redirect '/bokning/ny' if @bokning.nil?
 		haml :index
+	end
+	get '/bokning/ny' do
+		haml :bokning
+	end
+	post '/bokning/ny' do
+		b = Bokning.create params
+		redirect "/order/#{b.id}/ny"
+	end
+	get '/order/:bokning_id/ny' do
+		haml :order
+	end
+	post '/order/:bokning_id/ny' do
+		Order.create params
 	end
 end

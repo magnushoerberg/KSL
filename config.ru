@@ -1,5 +1,12 @@
 require 'rubygems'
-requrie "bundle/setup"
-require './app.rb'
+require "bundler/setup"
+
+require 'sinatra'
+require 'sinatra/reloader'
+require 'dm-core'
+require 'haml'
+
+require './app'
+require './models'
 
 run DaKroken

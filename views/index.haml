@@ -1,17 +1,5 @@
-.search-form
-	%form{:method=> "get", :action=> "/schedule"}
-		%input#datepicker{:type=> "text", :name=> "datepicker"}
-		%input{:type=> "submit", :value=> "Schema"}
-#krokar.right-column
-	-for @kroken in @krokar
-		%h3
-			%a{:href=> "#"} Kröken #{@kroken.date}
-		%div{:name=> "#{@kroken.date}"}
-			=partial :"partials/kroken_partial", @kroken
-
-:javascript
-	$(document).ready(function() {
-		$("#datepicker").datepicker();
-		$("#krokar").accordion();
-		$("#datepicker").datepicker("option", "dateFormat", "yy-mm-dd");
-	});
+%ul
+-@bokingar.each do |b|
+  %li
+    %a{:href=>"/bokning/#{b.id}"}Se bokning
+  %li=b.namn
