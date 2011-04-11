@@ -1,8 +1,0 @@
-﻿%form{:method=> "post", :action=> '/return/order'}
-	%input{:type=> "hidden", :name=> "_method", :value=> "put"}
-	%input{:type=> "hidden", :name=> "order_id", :value=> "#{@order.id}"}
-	-for article in @order.articles
-		%div
-			%label Hur många #{article.name} vill du lämna in:
-			%input{:type=> "text", :name=> "#{article.name}"}
-	%input{:type=> "submit", :value=> "Lämna in"}
