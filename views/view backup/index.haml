@@ -1,0 +1,5 @@
+%ul
+-@bokingar.each do |b|
+  %li
+    %a{:href=>"/bokning/#{b.id}"}Se bokning
+  %li=b.namn
