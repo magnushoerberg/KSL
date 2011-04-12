@@ -1,0 +1,154 @@
+body {
+	background: 1
+}
+body, input, select, button{
+	font-family: Georgia, Garamond, Palatino, serif;
+	font-size: 100%;
+}
+h1, h2, h3, table caption, fieldset legend{
+	font-family: 'Yanone Kaffeesatz', 'Century Gothic', Tahoma, Verdana, sans-serif;
+	font-weight: normal;
+	text-shadow: #FFF 0px 1px 1px;
+}
+h1{ font-size: 4em; }
+h2{ font-size: 2.5em; }
+h3{ font-size: 1.5em}
+a, a:visited{ 
+	color: #4183C4;
+	text-decoration: none;
+}
+a:hover{
+	text-decoration: underline;
+}
+p {
+	margin-bottom: 0.5em;
+}
+#hd{
+	height: 91px;
+	background: #fff url('../images/background-v2.png') repeat-x;
+	margin: 0 0 1em;
+}
+#hd h1{
+	position: relative;
+}
+#hd h1 a:hover{
+	text-decoration: none;
+}
+#hd h1 a {
+	color: #333;
+	position: absolute;
+	top:0;
+	z-index:2;
+	-webkit-mask-image: -webkit-gradient(linear, left top, 
+	left bottom, from(rgba(0,0,0,0)), to(rgba(0,0,0,1)));
+}
+
+#hd h1:after{
+	content: 'KårserviceÖstergötland';
+	color: #4183C4;
+}
+#hd input.ui-button{
+	padding: .1em .7em;
+}
+#menu {
+	text-align: right;
+	margin-top: 45px;
+	font-size: 1.2em;
+}
+#menu a {
+	text-shadow: #FFF 1px 1px 1px;
+	letter-spacing: -1px;
+}
+#menu form{
+	display: inline;
+}
+#ft{
+	background: #F1F1F1;
+	border-top: solid 2px #DDD;
+	border-bottom: solid 1px #DDD;
+	margin: 1em 0 0;
+	padding: 1em 0;
+}
+
+body .ui-widget {
+	font-family: Georgia, Garamond, Palatino, serif;
+}
+.calendars {
+	overflow-x: auto;
+	white-space: nowrap;
+}
+.cal {
+	width: 250px;
+	margin: 0 1em 0 0;
+	display: inline-block;
+}
+
+fieldset table{
+	width: 100%;
+	border-collapse: collapse;
+	margin: .4em 0;
+}
+fieldset thead {
+	font-weight: normal;
+	text-align: left;
+	background: #666;
+	font-family: sans-serif;
+	font-size: .9em;
+	color: #FFF;
+}
+fieldset tr{
+	border-bottom: solid 2px #444;
+}
+fieldset td, fieldset th{
+	padding: .5em;
+}
+
+fieldset {
+	padding: .5em 0;
+	margin: .5em 0;
+}
+fieldset legend{
+	width: 100%;
+	font-size: 1.8em;
+	text-shadow: white 0 0 2px;
+	padding: 0.1em 0.5em;
+	background: #404040;
+	color: white;
+	text-transform: uppercase;
+}
+.actions{
+	float: right;
+	font-size: 0.5em;
+	margin: 0.5em 2em 0 0;
+}
+.actions a{
+	font-family: sans-serif;
+	background: #09C;
+	padding: .4em .7em;
+	color: #FFF;
+	text-transform: uppercase;
+	font-weight: bold;
+	text-shadow: none;
+	border-radius: .4em;
+}
+.actions a:hover{
+	background: #0AD;
+	text-decoration:none;
+}
+label{
+	color: #666;
+	text-align: right;
+	display: inline-block;
+	width: 100%;
+	vertical-align: middle;
+	line-height: 1.3em;
+}
+#bokningar label{
+	text-align: left;
+	font-family: 'Yanone Kaffeesatz', 'Century Gothic', Tahoma, Verdana, sans-serif;
+	line-height: 1.3em;
+}
+#bd {
+	width: 80%;
+	margin-left: auto;
+}

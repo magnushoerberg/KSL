@@ -11,7 +11,7 @@
   %div.row
     %span
       %a Total:
-      %a{:"data-bind"=>'text: total(), click: tabortRad'}
+      %a{:"data-bind"=>'text: formateraPris(total()), click: tabortRad'}
     %div
       %button{:"data-bind" => "click: nyRad"} Ny artikel
       %button{:"data-bind" => "click: spara"} Skapa
@@ -24,12 +24,13 @@
     %td.twocol
       %input.fivecol{:"data-bind"=>'visible: artikel, value: antal, valueUpdate: "afterkeydown"'}
     %td.twocol
-      %span{:"data-bind"=>'visible: artikel, text: artikel() ? artikel().pris: null'}
+      %span{:"data-bind"=>'visible: artikel, text: artikel() ? formateraPris(artikel().pris): null'}
     %td.twocol
-      %span{:"data-bind"=>'visible: artikel, text: subtotal()'}
+      %span{:"data-bind"=>'visible: artikel, text: formateraPris(subtotal())'}
     %td
       %a{:href=>'#', :"data-bind"=>'click: function() { orderViewModel.tabortRad($data)}'}Ta bort
 :javascript
+  function formateraPris(pris) { return pris.toFixed(2) + "kr";}
   kategorier = [{namn : "Öl", artiklar : [{namn : "Spendrups", pris: 12.8}]},{namn : "Cider", artiklar : [{namn: "Briska Päron", pris: 11}]}]
   var orderRad = function() {
     this.kategori = ko.observable();
